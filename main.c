@@ -16,65 +16,76 @@ struct Point
     int x;
     int y;
 }; //On crée la structure "Point" avec deux valeurs entières: x et y
-int i,j,k,nbr,trouve;
 
 
-nbr=1; //Il s'agit de la variable qui se mettra dans le tableau. Elle commence à 1 et augmentera par la suite de 1 jusqu'à taille_tableau*2
-trouve=0; //Sert de booléen. On vérifiera que la case suivante est valide, si oui, trouvé passe à 1.
-Point position; //on crée un point que l'on nomme "position". Il servira à parcourir le carré magique dans les procédures.
 
-carre[TAILLE_TABLEAU][TAILLE_TABLEAU]; //On crée un tableau de dimesion TAILLE_TABLEAU, soit de la constante défini en début de programme
+
+
+
+void init(int carre[TAILLE_TABLEAU][TAILLE_TABLEAU]);
+void afficher(int carre[TAILLE_TABLEAU][TAILLE_TABLEAU]);
 
 int main()
 {
-init(); //On appelle la procédure init qui remplie le tableau.
+    int carre[TAILLE_TABLEAU][TAILLE_TABLEAU]; //On crée un tableau de dimesion TAILLE_TABLEAU, soit de la constante défini en début de programme
 
-avancer(); //On appelle la procédure avancer qui s'occupe d'avancer dans le tableau, de faire les tests et de "déposer" la valeur de nbr
+    init(carre); //On appelle la procédure init qui remplie le tableau.
 
-afficher(); //On appelle la procédure qui s'occupe d'afficher le tableau.
+    avancer(carre); //On appelle la procédure avancer qui s'occupe d'avancer dans le tableau, de faire les tests et de "déposer" la valeur de nbr
 
+   afficher(carre); //On appelle la procédure qui s'occupe d'afficher le tableau.
+
+
+return 0;
+
+}
+
+void init(int carre[TAILLE_TABLEAU][TAILLE_TABLEAU]){
+//BUT: Initialiser le tableau et remplir chaque cellule avec un 0, indiquant une case "vide"
+//ENTREE: On fournit le tableau représentant le carré
+//SORTIE: Tableau rempli de 0.
+    int i=0;
+    int j=0;
+
+    for(i=0;i<TAILLE_TABLEAU;i++){
+        for(j=0;j<TAILLE_TABLEAU;j++){
+            carre[i][j]=0;
+//on remplit chaque cellule de 0
+        }
+
+    }
 
 
 }
 
-void init(){
 
+void afficher(int carre[TAILLE_TABLEAU][TAILLE_TABLEAU]){
+//BUT: Afficher le carré magique à la fin du prgramme
+//ENTREE: On fournit le tableau représentant le carré rempli correctement
+//SORTIE: On affiche probablement chaque cellule du tableau
+int i,j;
 for(i=0;i<TAILLE_TABLEAU;i++){
 for(j=0;j<TAILLE_TABLEAU;j++){
-carre[i][j]=0;
-//On initialise le tableau. On le parcourt entièrement et on rempli chaque cellule par un 0.
 
+printf("%d ",carre[i][j]);
+
+//on affiche chaque cellule du tableau
 }
-
-}
-
-
-
-}
-
-
-void afficher(){
-
-for(i=0;i<TAILLE_TABLEAU;i++){
-for(j=0;j<TAILLE_TABLEAU;j++){
-if (j!=TAILLE_TABLEAU-1){
-        printf("%d  ",carre[i][j]);
-}
-else {
- printf("%d\n",carre[i][j]); //on affiche les cellules en parcourant grâce aux boucles. Afin de garantir une affichage correct, à chaque fois qu'on affiche le nombre de cellules égal à la constante, on revient à la ligne. On test donc à chaque fois si la place en y n'est pas égale à la dimension-1. Si c'est le cas, on va à la ligne.
-}
-
-
-}
+printf("\n"); //quand une ligne est rempli, on revient à la ligne.
 
 }
 }
 
 
-void avancer(){
+void avancer(int carre[TAILLE_TABLEAU][TAILLE_TABLEAU]){
+//BUT: Remplir correctement le tableau du carré magique
+//ENTREE: On fournit le tableau  rempli correctement ainsi que sa dimension
+//SORTIE: Le tableau représentant le carré magique est rempli correctement, c'est enfin un carré magique.
+    Point position; //on crée un point que l'on nomme "position". Il servira à parcourir le carré magique dans les procédures.
 position.x=((TAILLE_TABLEAU/2)-1); //On se place sur la première celle au nord du milieu.
 position.y=(TAILLE_TABLEAU/2);
-
+int i,j,k,nbr;
+nbr=1;
 carre[position.x][position.y]=nbr; //On lui associe la valeur "1".
 for(k=0;k<(TAILLE_TABLEAU*TAILLE_TABLEAU)-1;k++){
 //Cette boucle recommence autant de fois qu'il faut "placer" un nombre dans le carré, ce qui correspond à la (dimension du tableau)²
