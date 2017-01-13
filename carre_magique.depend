@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1484300968 source:c:\users\seb\documents\tp_carremagique\carre_magique\main.c
+	<stdio.h>
+	<stdlib.h>
+
